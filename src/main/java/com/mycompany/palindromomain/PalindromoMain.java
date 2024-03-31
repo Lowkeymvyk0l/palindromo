@@ -7,41 +7,56 @@ package com.mycompany.palindromomain;
 import java.util.Scanner;
 
 /**
- *
+ * @author Xavier
  * @author maykel 
  */
 public class PalindromoMain {
-
-    public static void main(String[] args){
-        Scanner s = new Scanner (System.in);
-        String palabra;
-        char [] palindromo;
-        int izq, der;
-        System.out.println("Ingresa la palabra: ");
-        palabra = s.nextLine();
-        palabra = palabra.toLowerCase();
-        palabra = palabra.replace("","");
-        palindromo = palabra.toCharArray();
-        izq = 0;
-        der = palindromo.length - 1;
-        
-        
-        while (izq < der){
-            if(palindromo[izq] == palindromo [der]){
-                der --;
-                izq++;
-                
-            }else{
-                 System.out.println("La palabra no es un palindromo ");
-                break;
-            }
-                
-            
-        }
-        
-        if ( izq == der ){
-            System.out.println("La palabra es un palindromo ");
-        }
+public static void main(String[] args) {
+        Scanner scanner =  new Scanner(System.in);
+        System.out.print("ingrese su texto: ");
+        responder(scanner.next());
         
     }
+    
+    public static String QuitarEspacios(String texto){
+        String espacio =  " ";
+        texto = texto.replaceAll(espacio,"");
+        texto = texto.toLowerCase();
+        return texto;          
+    }
+    
+    
+    
+    
+     public static boolean EsPalindromo(String texto)
+    { 
+        texto = QuitarEspacios(texto);
+        
+        if (texto.length() <= 1)
+        {
+            return true;
+        }
+        else
+        {
+            if (texto.charAt(0) != texto.charAt(texto.length() - 1))
+            {
+                return false;
+            }
+            else
+            { 
+                // System.out.println("lo que buscas" + texto.substring(1, texto.length() - 1));
+                return EsPalindromo(texto.substring(1, texto.length() - 1));
+                
+            }
+        }
+    }
+    public static void responder(String texto){
+    String respuesta = (EsPalindromo(texto) == true) ? "Si":"No" ;
+    System.out.println("¿Es palindromo?");
+    System.out.println("...");
+    System.out.println(respuesta);
+
+
+    }
 }
+    
